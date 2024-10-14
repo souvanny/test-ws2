@@ -17,7 +17,7 @@ class Product
      * @access  protected
      * @var     string
      */
-    protected static $pk_name = 'produit_ids';
+    protected static $pk_name = 'produit_id';
 
     /**
      * The object datas
@@ -173,12 +173,13 @@ class Product
                                 IF (produit_lang_titreobjet IS NULL, produit_titreobjet, produit_lang_titreobjet) produit_titreobjet,
                                 IF (produit_lang_nom IS NULL, produit_nom, produit_lang_nom) produit_nom,
                                 IF (produit_lang_description IS NULL, produit_description, produit_lang_description) produit_description
-            FROM produit p
+            FROM produit p LEFT JOIN produit_lang pl ON p.produit_id = pl.fk_produit_id 
             AND pl.fk_lang_id = :lang_id
             WHERE p.produit_id = :produit_id;";
 
         $params = [
-            'produit_id' => $array_datas['produit_id']
+            'produit_id' => $array_datas['produit_id'],
+            'lang_id' => $this->lang_id,
         ];
 
         $array_product = $this->db->fetchRow($sql_dispatch, $params);
