@@ -1,7 +1,7 @@
 <?php
 namespace FwTest\Classes;
 
-class ProductAction
+class Product
 {
     /**
      * The table name
@@ -85,7 +85,7 @@ class ProductAction
      */
 	public static function getAll($db, $begin = 0, $end = 15)
 	{
-		$sql_get = "SELECT p.* FROM " . self::$table_name . " LIMIT " . $begin. ", " . $end;
+		$sql_get = "SELECT * FROM " . self::$table_name . " LIMIT " . $begin. ", " . $end;
 
 		$result = $db->fetchAll($sql_get);
 
